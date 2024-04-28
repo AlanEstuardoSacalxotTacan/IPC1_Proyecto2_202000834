@@ -7,7 +7,7 @@ const router = express.Router() // Creación de un  Express router
 const {SignUp, GetAllUsers, Login, CargaMasiva}=require('../controllers/accesos')
 const {UpdateUser}=require('../controllers/Update')
 const {deleteUser}=require('../controllers/eliminar')
-const {createPost, getAllPost, getReportBar} = require('../controllers/Post')
+const {createPost, getAllPost, getReportBar} = require('../controllers/post')
 
 //Creamos las rutas para cada EndPoint con su respectivo controlador
 

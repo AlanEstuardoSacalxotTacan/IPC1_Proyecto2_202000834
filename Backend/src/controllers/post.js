@@ -6,7 +6,7 @@ var id_publicacion = 0
 function createPost(req, res) {
 
     try {
-        const carnet = req.body.carnet
+        const carnet = req.body.codigo
         const descripcion = req.body.descripcion
         const imagen = req.body.imagen
 
@@ -95,19 +95,6 @@ function getReportBar(req, res) {
             post: postCountByUser[user]
         }))
 
-        /*objects_userPost = [
-            {
-                user: 202010026
-                post:8
-            },
-
-            {
-                user: 202010025
-                post:5
-            }
-        ]
-        */
-
         // Agrega el nombre del usuario a objects_userPost
         for (const obj of objects_userPost) {
             const usuario = list_users.find(user => user.carnet === obj.user);
@@ -116,20 +103,7 @@ function getReportBar(req, res) {
             }
         }
 
-        /*objects_userPost = [
-            {
-                user: 202010026
-                post:8
-                nombre: Luis Jose
-            },
-
-            {
-                user: 202010025
-                post:5
-                nombre: Maria Lopez
-            }
-        ]
-        */
+        
 
 
         objects_userPost.sort((a, b) => b.post - a.post)  // Se ordena el array objects_userPost en orden descendente según la cantidad de publicaciones

@@ -1,17 +1,8 @@
-const { list_users } = require('../DataList/dataList')
+const { list_users } = require('../DataList/datalist')
 function UpdateUser(req, res) {
     try {
 
-        /*
-        Recibimos el siguiente JSON:
-            {
-                "carnet":"201915547",
-                "nombre": "Lionel Ronaldo",
-                "edad":25,
-                "facultad": "Ingeniería",
-                "password":"HolaMundo1*"
-            }
-        */
+        
         const { carnet, nombre, edad, facultad, password } = req.body //Obtenemos los valores que nos mandan desde el frontend
 
         //Buscamos al usuario por medio del carnet en la lista, si se encunetra nos retorna el índice, en caso contrario se retorna un -1

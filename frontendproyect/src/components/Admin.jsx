@@ -107,7 +107,6 @@ function Administrador() {
     const handleFileChange=(event)=>{
         setSelectedFile(event.target.files[0])
     }
-    //Nota: Se modifico el style "admin-background" 
     return (
         <div>
            <NavBarAdmin/>

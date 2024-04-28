@@ -4,10 +4,10 @@ import { useCookies } from 'react-cookie';
 import { Modal } from 'react-bootstrap'
 
 import NavBarAdmin from "./NavAdmin";
-
+import './Styles/MyStyles.css'
 function Administrador() {
 
-    const [cookies, setCoookies] = useCookies(['usuario'])
+    const [cookies, setCookies] = useCookies(['usuario'])
     const [datosUser, setDatosUser] = useState(cookies.usuario)
     const [users, setUsers] = useState([])
     const [selectdUser, setSelectdUser] = useState(null)
@@ -79,7 +79,7 @@ function Administrador() {
         }
 
         const jsonData= await selectedFile.text()
-        
+        console.log(jsonData)
         const userArray=JSON.parse(jsonData)
 
         fetch(`http://localhost:5000/CargaMasiva`, {
@@ -123,10 +123,14 @@ function Administrador() {
                         <table className="table table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th >Carnet</th>
+                                    <th >Codigo</th>
                                     <th >Nombre</th>
-                                    <th >Edad</th>
+                                    <th>Apellido</th>
+                                    <th >Genero</th>
                                     <th >Facultad</th>
+                                    <th >Carrera</th>
+                                    <th >Correo</th>
+                                    
                                     <th >Acciones</th>
                                 </tr>
                             </thead>
@@ -135,8 +139,12 @@ function Administrador() {
                                     <tr>
                                         <td>{user_x.carnet}</td>
                                         <td>{user_x.nombre}</td>
-                                        <td>{user_x.edad}</td>
+                                        <td>{user_x.apellido}</td>
+                                        <th>{user_x.genero}</th>
                                         <td>{user_x.facultad}</td>
+                                        <td>{user_x.carrera}</td>
+                                        <td>{user_x.correo}</td>
+                                        
                                         <td>
                                             <button className="btn btn-outline-danger" onClick={() => deleteUser(user_x.carnet)} >Eliminar</button>
                                             <button className="btn btn-outline-info" onClick={() => viewUser(user_x)}>Ver</button>
@@ -160,8 +168,12 @@ function Administrador() {
                                 <Modal.Body>
                                     <p>Carnet: {selectdUser.carnet} </p>
                                     <p>Nombre: {selectdUser.nombre} </p>
-                                    <p>Edad: {selectdUser.edad} </p>
+                                    <p>Apellido: {selectdUser.apellido} </p>
+                                    <p>Genero: {selectdUser.genero} </p>
                                     <p>Facultad: {selectdUser.facultad} </p>
+                                    <p>Carrera:{selectdUser.carrera}</p>
+                                    <p>Correo: {selectdUser.correo} </p>
+                                    <p>Contraseña: {selectdUser.contrasena} </p>
                                 </Modal.Body>
 
                                 <Modal.Footer>

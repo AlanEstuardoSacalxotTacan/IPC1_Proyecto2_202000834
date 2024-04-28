@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-
+import './Styles/MyStyles.css'
 
 
 function Login() {
@@ -15,10 +15,9 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (carnet === "202000834" && password1 === "ipc1f") {
+        if (carnet === "12024" && password1 === "@dminIPC1") {
             Navegador('/admin')
         } else {
-
             const dataJson = {
                 carnet: carnet,
                 password: password1

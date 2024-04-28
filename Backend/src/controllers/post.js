@@ -1,5 +1,5 @@
 const { list_users, list_post } = require('../DataList/datalist')
-const Object_Post = require('../objects/Post')
+const Object_Post = require('../objects/Posts')
 
 var id_publicacion = 0
 

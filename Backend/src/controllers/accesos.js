@@ -7,8 +7,8 @@ function CargaMasiva(req, res) {
         const usersArray=req.body
         console.log(usersArray)
         for (const userData of usersArray) {
-            const { carnet, nombre, edad, facultad, password } = userData;
-            const newUser = new Usuario(carnet, nombre, edad, facultad, password);
+            const { codigo, nombre, apellido, genero, facultad, carrera, correo, contrasena } = userData;
+            const newUser = new Usuario(codigo, nombre, apellido, genero, facultad, carrera, correo, contrasena);
             list_users.push(newUser);
         }
        
@@ -30,26 +30,10 @@ function CargaMasiva(req, res) {
 function SignUp(req, res) {
 
     try {
-        //Obtenemos los atributos que nos mandan desde el frontend por medio de un JSON
-        /* 
-            Importante:
-            Cuando nos manden un json desde el frontend, por ejemplo de esta forma:
-            {
-                "carnet":"201915547",
-                "nombre": "Lionel Ronaldo",
-                "edad":25,
-                "facultad": "Ingeniería",
-                "password":"HolaMundo1*"
-            }
-            Y deseamos obtener los atributos aquí en el backend de esta forma:
-            const { carnet, nombre, edad, facultad, password } = req.body
-
-            Lo que va dento de llaves para obtener los valores debe llamarse igual a como viene en el JSON
-
-        */
-        const { carnet, nombre, edad, facultad, password } = req.body //Aquí obtenemos el valor de cada atributo que nos mandan en el JSON
+        
+        const { codigo, nombre, apellido, genero, facultad, carrera, correo, contrasena } = req.body //Aquí obtenemos el valor de cada atributo que nos mandan en el JSON
         // Verificar si el carnet ya está en uso
-        const usuarioExiste = list_users.find(x_user => x_user.carnet === carnet)
+        const usuarioExiste = list_users.find(x_user => x_user.codigo === codigo)
         
         //Si el usuario existe se nos retorna el elemento donde esta guardado en la lista, sino existe se retorna un "null" o un "undefined" 
         if (usuarioExiste) {
@@ -57,7 +41,7 @@ function SignUp(req, res) {
         }
 
          // Si el carnet no está en uso, crear una nueva instancia de Usuario con los datos proporcionados
-        const newUser = new Usuario(carnet, nombre, edad, facultad, password)
+        const newUser = new Usuario(codigo, nombre, apellido, genero, facultad, carrera, correo, contrasena)
         list_users.push(newUser)  // Agregar el nuevo usuario a la lista
 
         // Enviar una respuesta como json con el mensaje de confirmación
@@ -94,30 +78,22 @@ function GetAllUsers(req, res) {
 
 function Login(req, res) {
     try {
-        /*
-        Recibimos el siguiente JSON:
-            {
-                "carnet":"201915547",
-                "password":"HolaMundo1*"
-            }
-        */
-
-        //Obtenemos los valores que nos mandan desde el JSON
-        const carnet1 = req.body.carnet
-        const password1 = req.body.password
+       
+        const carnet1 = req.body.codigo
+        const password1 = req.body.contrasena
 
         // Buscar el usuario en la lista por su carnet y contraseña 
-        const usuarioEncontrado = list_users.find(x_user => x_user.carnet === carnet1 && x_user.password === password1)
+        const usuarioEncontrado = list_users.find(x_user => x_user.codigo === carnet1 && x_user.contrasena === password1)
         
         //Si las credenciales son correctas, se nos retorna el elemento donde esta guardado en la lista, sino existe se retorna un "null" o un "undefined" 
         if (usuarioEncontrado) {
 
             //Construimos un JSON retornando todos los datos del usuario, menos su contraseña
             const userFind={
-                carnet: usuarioEncontrado.carnet,
+                codigo: usuarioEncontrado.codigo,
                 nombre:usuarioEncontrado.nombre,
-                edad:usuarioEncontrado.edad,
-                facultad:usuarioEncontrado.facultad
+                apellido:usuarioEncontrado.apellido,
+                facultad:usuarioEncontrado.facultad,
             }
 
             //Respondemos con un JSON, el cual lleva un booleano (encontrado) para indicar si las credenciales son correctas, además de los datos del usuario
